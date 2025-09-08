@@ -57,10 +57,28 @@
     /* GALLERY */
     .gallery img {
       transition: filter 0.3s ease, transform 0.3s ease;
+      cursor: pointer;
     }
     .gallery img:hover {
       filter: brightness(1.1);
       transform: scale(1.05);
+    }
+
+    /* LIGHTBOX */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+    #lightbox img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     }
 
     /* REVIEWS */
@@ -102,7 +120,7 @@
       </div>
       <!-- Mobile Menu -->
       <div class="block md:hidden">
-        <button id="menu-toggle" class="focus:outline-none">☰</button>
+        <button id="menu-toggle" class="focus:outline-none text-2xl">☰</button>
       </div>
       <ul id="nav-links" class="hidden md:flex space-x-4 flex-col md:flex-row md:space-x-6 bg-[var(--dark)] md:bg-transparent absolute md:static top-16 left-0 w-full md:w-auto p-4 md:p-0">
         <li><a href="#home" class="block py-2 md:py-0 hover:text-[var(--accent)]">Home</a></li>
@@ -147,7 +165,26 @@
     <div class="container mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold text-center text-[var(--dark)] mb-12">Our Menu</h2>
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Menu items ... unchanged -->
+        <div class="menu-item bg-white p-6 rounded-lg shadow-lg">
+          <img src="dinosoup.jpg" alt="Dinosaur Soup" class="w-full h-48 object-cover rounded mb-4" />
+          <h3 class="text-xl font-semibold mb-2">Dinosaur Soup</h3>
+          <p class="text-gray-600 mb-4">Rawring with a happy tummy!</p>
+          <span class="text-[var(--dark)] font-bold">Oculudentavis: Php 169</span><br>
+          <span class="text-[var(--dark)] font-bold">T-rex: Php 329</span><br>
+          <span class="text-[var(--dark)] font-bold">Giganotosaurus: Php 499</span>
+        </div>
+        <div class="menu-item bg-white p-6 rounded-lg shadow-lg">
+          <img src="chicken.jpg" alt="Creamy Chicken" class="w-full h-48 object-cover rounded mb-4" />
+          <h3 class="text-xl font-semibold mb-2">Creamy Chicken</h3>
+          <p class="text-gray-600 mb-4">Tender Chicken that brings warmth and satisfaction in every bite.</p>
+          <span class="text-[var(--dark)] font-bold">Php 150</span>
+        </div>
+        <div class="menu-item bg-white p-6 rounded-lg shadow-lg">
+          <img src="beef.jpg" alt="Savory Beef Delight" class="w-full h-48 object-cover rounded mb-4" />
+          <h3 class="text-xl font-semibold mb-2">Savory Beef Delight</h3>
+          <p class="text-gray-600 mb-4">Beef simmered to perfection in a rich blend of herbs and spices.</p>
+          <span class="text-[var(--dark)] font-bold">Php 200</span>
+        </div>
       </div>
     </div>
   </section>
@@ -157,17 +194,73 @@
     <div class="container mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold text-center text-[var(--dark)] mb-12">Gallery</h2>
       <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 gallery">
-        <!-- Gallery images ... unchanged -->
+        <img src="one.jpg" alt="Interior" class="rounded-lg shadow-md" />
+        <img src="two.jpg" alt="Dish" class="rounded-lg shadow-md" />
+        <img src="three.jpg" alt="Outdoor seating" class="rounded-lg shadow-md" />
+        <img src="four.jpg" alt="Chef team" class="rounded-lg shadow-md" />
+        <img src="fivee.jpg" alt="Wine rack" class="rounded-lg shadow-md" />
+        <img src="six.jpg" alt="Romantic table" class="rounded-lg shadow-md" />
       </div>
     </div>
   </section>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="flex">
+    <img src="" alt="Expanded view">
+  </div>
 
   <!-- Feedback -->
   <section id="feedback" class="py-16 md:py-20 bg-[#F5EAF8] px-4">
     <div class="container mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold text-center text-[var(--dark)] mb-12">Customer Feedback</h2>
       <div class="flex flex-col lg:flex-row">
-        <!-- Form + Reviews ... unchanged -->
+        <!-- Form -->
+        <div class="lg:w-1/2 p-4">
+          <h3 class="text-2xl font-semibold mb-6 text-[var(--dark)]">Share Your Experience</h3>
+          <form class="feedback-form bg-white p-6 rounded-lg shadow-lg">
+            <div class="mb-4">
+              <label class="block text-gray-700 mb-2">Your Name</label>
+              <input type="text" class="w-full p-2 border rounded" required>
+            </div>
+            <div class="mb-4">
+              <label class="block text-gray-700 mb-2">Email (Optional)</label>
+              <input type="email" class="w-full p-2 border rounded">
+            </div>
+            <div class="mb-4">
+              <label class="block text-gray-700 mb-2">Rating</label>
+              <select class="w-full p-2 border rounded" required>
+                <option value="5">5 Stars - Excellent</option>
+                <option value="4">4 Stars - Very Good</option>
+                <option value="3">3 Stars - Good</option>
+                <option value="2">2 Stars - Fair</option>
+                <option value="1">1 Star - Poor</option>
+              </select>
+            </div>
+            <div class="mb-4">
+              <label class="block text-gray-700 mb-2">Your Review</label>
+              <textarea rows="4" class="w-full p-2 border rounded" placeholder="Tell us about your visit..." required></textarea>
+            </div>
+            <button type="submit" class="bg-[var(--dark)] text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-[var(--accent)]">Submit Feedback</button>
+          </form>
+        </div>
+        <!-- Reviews -->
+        <div class="lg:w-1/2 p-4">
+          <h3 class="text-2xl font-semibold mb-6 text-[var(--dark)]">Recent Reviews</h3>
+          <div id="reviews-container">
+            <div class="review-item">
+              <div class="flex items-center mb-2">
+                <img src="https://placehold.co/50x50" class="rounded-full w-12 h-12 mr-4" />
+                <div>
+                  <h4 class="font-semibold">Sophia Johnson</h4>
+                  <div class="star-rating" data-rating="5">
+                    <span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span>
+                  </div>
+                </div>
+              </div>
+              <p class="text-gray-600">"An absolute delight! The Chicken was perfectly cooked, and the service was impeccable."</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -177,7 +270,30 @@
     <div class="container mx-auto">
       <h2 class="text-3xl md:text-4xl font-bold text-center text-[var(--dark)] mb-12">Contact Us</h2>
       <div class="flex flex-col md:flex-row">
-        <!-- Contact form + Info ... unchanged -->
+        <div class="md:w-1/2 p-4">
+          <form class="contact-form">
+            <div class="mb-4">
+              <label class="block text-gray-700 mb-2">Name</label>
+              <input type="text" class="w-full p-2 border rounded" required>
+            </div>
+            <div class="mb-4">
+              <label class="block text-gray-700 mb-2">Email</label>
+              <input type="email" class="w-full p-2 border rounded" required>
+            </div>
+            <div class="mb-4">
+              <label class="block text-gray-700 mb-2">Message</label>
+              <textarea rows="4" class="w-full p-2 border rounded" required></textarea>
+            </div>
+            <button type="submit" class="bg-[var(--dark)] text-white px-6 py-2 rounded hover:bg-[var(--accent)]">Submit</button>
+          </form>
+        </div>
+        <div class="md:w-1/2 p-4">
+          <h3 class="text-2xl font-semibold mb-4">Visit Us</h3>
+          <p class="mb-2">LAVERDE PINES BAGUIO CITY, Baguio City, Philippines</p>
+          <p class="mb-2">Phone: 0968 676 9490</p>
+          <p class="mb-2">Email: info@tripleDrestaurant.com</p>
+          <img src="now.jpg" alt="Map" class="rounded-lg shadow-lg mt-4 w-full" />
+        </div>
       </div>
     </div>
   </section>
@@ -216,7 +332,19 @@
       this.reset();
     });
 
-    // Feedback form (unchanged)
-  </script>
-</body>
-</html>
+    // Feedback form
+    document.querySelector('.feedback-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = this.elements[0].value;
+      const rating = this.elements[2].value;
+      const review = this.elements[3].value;
+      const reviewsContainer = document.getElementById('reviews-container');
+      const newReview = document.createElement('div');
+      newReview.className = 'review-item';
+      newReview.innerHTML = `
+        <div class="flex items-center mb-2">
+          <img src="https://placehold.co/50x50" class="rounded-full w-12 h-12 mr-4" />
+          <div>
+            <h4 class="font-semibold">${name}</h4>
+            <div class="star-rating" data-rating="${rating}">
+              ${
